@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <edge translate="label" module="admingridcolumns">
+            <label>outer/edge</label>
+            <sort_order>200</sort_order>
+        </edge>
+    </tabs>
+    <sections>
+        <admingridcolumns translate="label" module="admingridcolumns">
+            <class>separator-top</class>
+            <label>Grid Columns</label>
+            <tab>edge</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <data translate="label" module="admingridcolumns">
+                    <label>Columns</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <columns translate="comment">
+                            <label>Grid/Columns Setup</label>
+                            <frontend_model>admingridcolumns/system_config_form_field_gridColumns</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </columns>
+                    </fields>
+                </data>
+            </groups>
+        </admingridcolumns>
+    </sections>
+</config>

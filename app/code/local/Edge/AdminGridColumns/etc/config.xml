@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Edge_AdminGridColumns>
+            <version>1.0.0</version>
+        </Edge_AdminGridColumns>
+    </modules>
+    <global>
+        <blocks>
+            <admingridcolumns>
+                <class>Edge_AdminGridColumns_Block</class>
+            </admingridcolumns>
+        </blocks>
+        <models>
+            <admingridcolumns>
+                <class>Edge_AdminGridColumns_Model</class>
+            </admingridcolumns>
+        </models>
+        <helpers>
+            <admingridcolumns>
+                <class>Edge_AdminGridColumns_Helper</class>
+            </admingridcolumns>
+        </helpers>
+    </global>
+    <adminhtml>
+        <events>
+            <eav_collection_abstract_load_before>
+                <observers>
+                    <edge_admin_grid_collection>
+                        <class>admingridcolumns/observer</class>
+                        <method>addFieldsToCollection</method>
+                    </edge_admin_grid_collection>
+                </observers>
+            </eav_collection_abstract_load_before>
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <edge_admin_grid_columns>
+                        <class>admingridcolumns/observer</class>
+                        <method>addColumnsToGrid</method>
+                    </edge_admin_grid_columns>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
+        </events>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <admingridcolumns translate="title">
+                                            <title>Admin Grid Columns</title>
+                                            <sort_order>300</sort_order>
+                                        </admingridcolumns>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>

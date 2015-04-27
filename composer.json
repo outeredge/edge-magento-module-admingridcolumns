@@ -1,0 +1,21 @@
+{
+    "name": "outeredge/edge-magento-module-admingridcolumns",
+    "type": "magento-module",
+    "description": "Admin Grid Columns Module by outer/edge",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "outer/edge",
+            "email": "support@outeredgeuk.com"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "extra": {
+        "map": [
+            ["app/code/local/Edge/AdminGridColumns", "app/code/local/Edge/AdminGridColumns"],
+            ["app/etc/modules/Edge_AdminGridColumns.xml", "app/etc/modules/Edge_AdminGridColumns.xml"]
+        ]
+    }
+}

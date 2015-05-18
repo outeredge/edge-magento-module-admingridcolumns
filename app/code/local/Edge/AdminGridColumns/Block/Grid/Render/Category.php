@@ -11,7 +11,7 @@ class Edge_AdminGridColumns_Block_Grid_Render_Category extends Mage_Adminhtml_Bl
         $entity = new $modelClass();
         $entity->load($id);
 
-        $categories = '';
+        $categories = array();
 
         $categoryIds = $entity->getCategoryIds();
         foreach ($categoryIds as $categoryId) {

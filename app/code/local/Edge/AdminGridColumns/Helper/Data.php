@@ -37,9 +37,8 @@ class Edge_AdminGridColumns_Helper_Data extends Mage_Core_Helper_Abstract
     {
         switch ($blockClass) {
             case 'Mage_Adminhtml_Block_Catalog_Product_Grid';
-                return 'Mage_Catalog_Model_Resource_Product_Collection';
+                return get_class(Mage::getModel('catalog/product')->getCollection());
         }
-
-        return 'scott';
+        return null;
     }
 }

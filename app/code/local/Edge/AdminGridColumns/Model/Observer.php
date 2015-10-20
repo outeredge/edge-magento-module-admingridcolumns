@@ -81,6 +81,37 @@ class Edge_AdminGridColumns_Model_Observer
                     'options' => Mage::getSingleton('tax/class')->getCollection()->toOptionHash()
                 );
                 break;
+
+            default:
+                $attribute = Mage::getModel('eav/entity_attribute')
+                    ->getCollection()
+                    ->addFieldToFilter('attribute_code', array('eq' => $column))
+                    ->getFirstItem();
+
+                if ($attribute->getAttributeId()) {
+                    if ($attribute->usesSource()) {
+                        $options = array();
+                        foreach ($attribute->getSource()->getAllOptions() as $option){
+                            $options[$option['value']] = $option['label'];
+                        }
+
+                        $fieldSettings = array(
+                            'type'    => 'options',
+                            'options' => $options
+                        );
+                    }
+                    else {
+                        switch ($attribute->getBackendType()) {
+                            case 'datetime':
+                                $fieldSettings = array(
+                                    'type'      => 'datetime',
+                                    'gmtoffset' => true
+                                );
+                                break;
+                        }
+                    }
+                }
+                break;
         }
 
         if (isset($fieldSettings)) {

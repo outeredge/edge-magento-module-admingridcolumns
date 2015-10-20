@@ -19,59 +19,60 @@ class Edge_AdminGridColumns_Block_System_Config_Form_Field_GridAndColumn extends
             'products' => 'Mage_Adminhtml_Block_Catalog_Product_Grid'
         );
 
+        $productAttributes = array(
+            array(
+                'label' => Mage::helper('adminhtml')->__('Category'),
+                'value' => $this->_getGridAndColumnValue('products', 'category')
+            ),
+            array(
+                'label' => Mage::helper('adminhtml')->__('Short Description'),
+                'value' => $this->_getGridAndColumnValue('products', 'short_description')
+            ),
+            array(
+                'label' => Mage::helper('adminhtml')->__('Weight'),
+                'value' => $this->_getGridAndColumnValue('products', 'weight')
+            ),
+            array(
+                'label' => Mage::helper('adminhtml')->__('Special Price'),
+                'value' => $this->_getGridAndColumnValue('products', 'special_price')
+            ),
+            array(
+                'label' => Mage::helper('adminhtml')->__('Tax Class Id'),
+                'value' => $this->_getGridAndColumnValue('products', 'tax_class_id')
+            )
+        );
+
+        $systemProductAttributes = array(
+            'name',
+            'sku',
+            'status',
+            'visibility',
+            'category_ids',
+            'required_options',
+            'has_options',
+            'media_gallery',
+            'gallery',
+            'options_container'
+        );
+
+        $attributes = Mage::getModel('catalog/product')->getAttributes();
+        foreach ($attributes as $attribute) {
+            if ($attribute->getAttributeId() && !in_array($attribute->getAttributeCode(), $systemProductAttributes)) {
+                $productAttributes[] = array(
+                    'label' => ucwords(str_replace('_', ' ', $attribute->getAttributeCode())),
+                    'value' => $this->_getGridAndColumnValue('products', $attribute->getAttributeCode())
+                );
+            }
+        }
+
+        usort($productAttributes, function($a, $b){
+            return strcmp($a['label'], $b['label']);
+        });
+
         $this->setOptions(array(
             array(
                 'label' => Mage::helper('adminhtml')->__('Products'),
-                'value' => array(
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Image'),
-                        'value' => $this->_getGridAndColumnValue('products', 'image')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Description'),
-                        'value' => $this->_getGridAndColumnValue('products', 'description')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Short Description'),
-                        'value' => $this->_getGridAndColumnValue('products', 'short_description')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Category'),
-                        'value' => $this->_getGridAndColumnValue('products', 'category')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('MPN'),
-                        'value' => $this->_getGridAndColumnValue('products', 'mpn')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Weight'),
-                        'value' => $this->_getGridAndColumnValue('products', 'weight')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('URL Key'),
-                        'value' => $this->_getGridAndColumnValue('products', 'url_key')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Special Price'),
-                        'value' => $this->_getGridAndColumnValue('products', 'special_price')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Tax Class'),
-                        'value' => $this->_getGridAndColumnValue('products', 'tax_class_id')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Meta Title'),
-                        'value' => $this->_getGridAndColumnValue('products', 'meta_title')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Meta Keywords'),
-                        'value' => $this->_getGridAndColumnValue('products', 'meta_keyword')
-                    ),
-                    array(
-                        'label' => Mage::helper('adminhtml')->__('Meta Description'),
-                        'value' => $this->_getGridAndColumnValue('products', 'meta_description')
-                    )
-                )
+                'value' => $productAttributes
             )
         ));
 

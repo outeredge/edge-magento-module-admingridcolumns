@@ -90,7 +90,7 @@ class Edge_AdminGridColumns_Model_Observer
                 if ($attribute->getAttributeId()) {
                     if ($attribute->usesSource()) {
                         $options = array();
-                        foreach ($attribute->getSource()->getAllOptions() as $option){
+                        foreach ($attribute->getSource()->getAllOptions(false, false) as $option){
                             $options[$option['value']] = $option['label'];
                         }
 

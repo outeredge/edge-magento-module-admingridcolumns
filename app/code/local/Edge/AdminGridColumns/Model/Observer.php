@@ -36,7 +36,8 @@ class Edge_AdminGridColumns_Model_Observer
         $columnTitle = str_replace('_', ' ', $column);
         $settings = array(
             'header' => Mage::helper('adminhtml')->__(ucwords($columnTitle)),
-            'index'  => $column
+            'index'  => $column,
+            'width'  => '100px'
         );
 
         switch ($column) {
@@ -83,10 +84,8 @@ class Edge_AdminGridColumns_Model_Observer
                 break;
 
             default:
-                $attribute = Mage::getModel('eav/entity_attribute')
-                    ->getCollection()
-                    ->addFieldToFilter('attribute_code', array('eq' => $column))
-                    ->getFirstItem();
+                $attribute = Mage::getModel('eav/config')
+                    ->getAttribute(Mage_Catalog_Model_Product::ENTITY, $column);
 
                 if ($attribute->getAttributeId()) {
                     if ($attribute->usesSource()) {

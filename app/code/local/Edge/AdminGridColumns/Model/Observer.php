@@ -1,6 +1,6 @@
 <?php
 
-class Edge_AdminGridColumns_Model_Observer
+class Edge_AdminGridColumns_Model_Observer extends Mage_Adminhtml_Block_Widget_Grid
 {
     protected $_after;
 
